@@ -11,4 +11,10 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\PTQ.Application\PTQ.Application.csproj" />
+      <ProjectReference Include="..\PTQ.Models\PTQ.Models.csproj" />
+      <ProjectReference Include="..\PTQ.Repositories\PTQ.Repositories.csproj" />
+    </ItemGroup>
+
 </Project>
