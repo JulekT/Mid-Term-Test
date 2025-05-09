@@ -1,3 +1,5 @@
+using PTQ.API;
+using PTQ.Application;
 using PTQ.Models;
 using PTQ.Repositories;
 
@@ -25,6 +27,7 @@ if (string.IsNullOrEmpty(connectionString))
     Console.WriteLine("No connection string found.");
     return;
 }
+
 DatabaseController controller = new(connectionString);
 
 app.MapGet("/api/quizzes", () =>
@@ -38,9 +41,9 @@ app.MapGet("/api/quizzes/{id}", (int id) =>
     return Results.Ok(requestedQuiz);
 });
 
-/*app.MapPost("/api/quizzes", () =>
+app.MapPost("/api/quizzes", (PostQuizRequestBody body) =>
 {
-
-});*/
+    
+});
 
 app.Run();

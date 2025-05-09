@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Microsoft.Data.SqlClient;
+using PTQ.API;
 using PTQ.Models;
 
 namespace PTQ.Repositories;
@@ -45,4 +46,35 @@ public class DatabaseController
             }
         }
     }
+
+    public Quiz CreateNewQuiz(PostQuizRequestBody body)
+    {
+        using (SqlConnection connection = new(connectionString))
+        {
+            connection.Open();
+
+            using (SqlCommand command = new("SELECT Id FROM PotatoTeacher WHERE Name = @Name", connection))
+            {
+                command.Parameters.Add("@Name", SqlDbType.NVarChar);
+                command.Parameters["@Name"].Value = body.Name;
+                
+                SqlDataReader reader = command.ExecuteReader();
+                if (!reader.HasRows)
+                {
+                    return new Quiz(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetString(3));
+                }
+                else
+                {
+                    reader.Read();
+                    int id = reader.GetInt32(0);
+
+                    using (SqlCommand command2 = new("INSERT INTO Quiz(Name, PotatoTeacherId, PathFile) VALUES()", connection))
+                    {
+                        
+                    }
+                }
+            }
+        }
+        return tr
+    } 
 }
